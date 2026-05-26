@@ -1,4 +1,4 @@
-// Dinero recaudado por cada punto de venta
+-- Dinero recaudado por cada punto de venta
 SELECT
     pv.nombre AS punto_venta,
     SUM(v.total) AS total_recaudado
@@ -7,7 +7,7 @@ INNER JOIN punto_venta pv
     ON v.id_punto_venta = pv.id_punto_venta
 GROUP BY pv.nombre;
 
-// Mayor monto recaudado entre los mostradores
+-- Mayor monto recaudado entre los mostradores
 SELECT MAX(total_recaudado) AS mayor_recaudacion
 FROM (
     SELECT
@@ -17,7 +17,7 @@ FROM (
     GROUP BY id_punto_venta
 ) AS recaudaciones;
 
-// Mostrador o mostradores con mayor recaudación
+-- Mostrador o mostradores con mayor recaudación
 WITH recaudacion AS (
     SELECT
         pv.nombre,
@@ -34,7 +34,7 @@ WHERE total_recaudado = (
     FROM recaudacion
 );
 
-// Los 3 productos más vendidos
+-- Los 3 productos más vendidos
 SELECT
     p.nombre,
     SUM(dv.cantidad) AS cantidad_vendida
@@ -45,7 +45,7 @@ GROUP BY p.nombre
 ORDER BY cantidad_vendida DESC
 LIMIT 3;
 
-// Cantidad de kg de harina consumidos
+-- Cantidad de kg de harina consumidos
 SELECT
     SUM(dv.cantidad * rp.kg_harina_por_unidad) AS kg_harina_consumidos
 FROM detalle_venta dv
